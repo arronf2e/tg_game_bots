@@ -17,15 +17,18 @@ const {tgLoginPage} = require("../constants");
   try {
     await page.waitForSelector('#LeftMainHeader');
     console.log('登录成功');
-    await page.goto(gameHome);
+    await page.goto(gamePage);
     // 点击 launch 按钮
-    await page.waitForSelector(".is-web-view");
-    await page.click(".is-web-view")
+    await page.waitForSelector(".tgme_action_button_new");
+    await page.click(".tgme_action_button_new")
     console.log('点击 launch 按钮');
     // 点击 popup 按钮打开应用
     await page.waitForSelector(".popup-button");
     await page.click(".popup-button:nth-child(1)")
     console.log('点击 popup 按钮打开应用');
+    page.on('response', response => {
+      console.log(response.url(), '接口返回')
+    })
   } catch (e) {
     console.log(e);
   }
